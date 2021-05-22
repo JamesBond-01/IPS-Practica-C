@@ -46,7 +46,7 @@ double suma (double num1, double num2)
 {
     int result;
     
-    result = num1 + num2;       /*Realiza la suma entre dos numeros X.*/
+    result = num1 + num2;      /*Realiza la suma entre dos numeros X.*/
     
     printf ("\nEl resultado de %lf + %lf = %d\n", num1, num2, result);
 }
