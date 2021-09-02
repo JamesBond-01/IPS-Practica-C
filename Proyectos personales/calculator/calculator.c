@@ -26,7 +26,7 @@ double potencia (double num1)
 
 int factorial (int num1)
 {
-    int result;
+    unsigned long long result;
     
     result = 1;
     
@@ -38,7 +38,7 @@ int factorial (int num1)
 
         num1 --;    /*Le resta 1 al numero para realizar la multiplicacion por el anterior.*/
     }
-    printf (" 1 = %d", result);     /*Imprime el 1 sin el 'x' y el resultado.*/
+    printf (" 1 = %llu", result);     /*Imprime el 1 sin el 'x' y el resultado.*/
     
 }
 
@@ -46,7 +46,7 @@ double suma (double num1, double num2)
 {
     int result;
     
-    result = num1 + num2;       /*Realiza la suma entre dos numeros X.*/
+    result = num1 + num2;      /*Realiza la suma entre dos numeros X.*/
     
     printf ("\nEl resultado de %lf + %lf = %d\n", num1, num2, result);
 }
@@ -99,7 +99,7 @@ int main ()
         printf ("\nIngrese el primer número: ");
         scanf ("%lf" , &num1);
 
-        printf ("\nIngrese la operación que desee realizar. (Ver tabla de referencia): "); 
+        printf ("\nIngrese la operación que desee realizar. (Ver tabla de referencia): \n"); 
         scanf ("%d" , &operacion);
 
         if (operacion > 3)      /*Si no es ni raiz ni potencia, pide otro número.*/
