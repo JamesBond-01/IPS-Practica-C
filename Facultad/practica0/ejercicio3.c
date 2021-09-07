@@ -12,12 +12,11 @@
  * @param hundred array de 100 posiciones
  */ 
 void up(int *hundred) {
-    int i;
 
     printf("\n=====================================================================\n");
     printf("Estas viendo los primeros 100 numeros ordenados de forma ascendente:\n");
     printf("=> "); 
-    for(i = 0; i < 100; i++) {
+    for(int i = 0; i < 100; i++) {
         hundred[i] = i;
         printf("%d", hundred[i]);
         if (i < 99) {
@@ -35,12 +34,11 @@ void up(int *hundred) {
  * @param hundred array de 100 posiciones
  */ 
 void down(int *hundred) {
-    int i;
 
     printf("\n=====================================================================\n");
     printf("Ahora, los primeros 100 numeros ordenados de forma descendente:\n");
     printf("=> "); 
-    for(i = 99; i >= 0; i--) {
+    for(int i = 99; i >= 0; i--) {
         hundred[i] = i;
         printf("%d", hundred[i]);
         if (i > 0) {

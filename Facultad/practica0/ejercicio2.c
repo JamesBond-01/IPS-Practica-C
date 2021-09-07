@@ -8,18 +8,15 @@
  * ===================================================================================
  */ 
 
-//Array para guardar los 10 numeros.
-int listNum[10];
-//Contador.
-int i;
 
 /**
  * Input de los numeros de la lista.
  * Devuelve mensaje de error si se ingresa el numero 0 a la lista.
+ * @param listNum Array vacio de 10 posiciones.
  */
-void getList() {
+void genList(int *listNum) {
     printf("Ingrese una lista de 10 numeros distintos de 0:\n");
-    for(i = 0; i < 10; i++) {
+    for(int i = 0; i < 10; i++) {
         printf("\t*> ");
         scanf("%d", &listNum[i]); 
         while(listNum[i] == 0) {
@@ -31,11 +28,12 @@ void getList() {
 }
 
 /**
- * Muestra la lista de numeros que ingreso el usuario.
+ * Muestra la lista de numeros ingresadas por el usuario.
+ * @param listNum Array 10 posiciones con valores ingresados por teclado.
  */ 
 void showList(int *listNum) {
     printf("\nLa lista de numeros ingresados es: ");
-    for(i = 0; i < 10; i++) {
+    for(int i = 0; i < 10; i++) {
         printf("%d", listNum[i]);
         //Luego de mostrar el ultimo numero del array, se ingresa un NewLine.
         //Sino, se escribe una coma entre numero y numero.
@@ -51,21 +49,27 @@ void showList(int *listNum) {
 /**
  * Compara el numero que ingrese el usuario con la lista e imprime en pantalla
  * un mensaje indicando si el mismo se encuentra dentro de la lista.
+ * @param listNum Array 10 posiciones con valores ingresados por teclado.
+ * @param introducedNum Numero aleatorio ingresado por el usuario por fuera de la lista.
  */
-void isInTheList(int introducedNum){
-    for(i = 0; i < 10; i++) {
+void isInTheList( int *listNum, int introducedNum){
+    for(int i = 0; i < 10; i++) {
         if(introducedNum == listNum[i]) {
             printf("%d esta en la lista.\n", introducedNum);
+            break;
         }
     }
 }
 
 int main() {
     
-    //Numero aleatorio que escribe el usaurio luego de la creacion de la list.
+    //Array para guardar los 10 numeros.
+    int listNum[10];
+
+    //Numero aleatorio que escribe el usaurio luego de la creacion de la lista.
     int userNum; 
 
-    getList();
+    genList(listNum);
     showList(listNum);
 
     printf("Ingrese numeros aleatorios.\n");
@@ -73,7 +77,7 @@ int main() {
     do {
         printf("\t*> ");        
         scanf("%d", &userNum);
-        isInTheList(userNum);
+        isInTheList(listNum, userNum);
     } while(userNum != 0);
 
     return 0;
