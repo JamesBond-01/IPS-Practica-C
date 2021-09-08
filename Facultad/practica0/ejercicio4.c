@@ -1,6 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define ASC_ORDER 0
+#define DESC_ORDER 1
+#define MAX_INDEX 50
+#define ARRAY_SIZE 100
+
 /**
  * ======================================Consigna=========================================
  * Programa que rellene un array con los numeros pares y otro con los impares 
@@ -9,84 +14,104 @@
  */
 
 /**
- * Llena un array de 50 posiciones con numeros pares desde el 1 al 100. Para ello, se lleva a cabo 
- * una division por 2, cuyo resto determinara si es par. Cuando el resto de la division sea 0, sabremos
- * que se trata de un numero par y, por ende, se guarda dentro del array de los numeros pares. 
- * @param evenNum Array vacio de 50 posiciones.
- * @param division Estructura de division.
- * @return Array con numeros pares del 1 al 100.
+ * Funcion que llena un array de numeros del 1 al 100.
+ * @param numbers array vacio de 100 posiciones.
+ * @return Array completados con numeros del 1 al 100.
  */ 
-int *getEvenNum(int *evenNum, div_t division) {
-    //Contador
-    int x = 0;
-
-    for(int i = 1; i <= 100; i++) {
-        division = div(i , 2);
-        if (division.rem == 0) {
-            evenNum[x] = i;
-            x++;
-        }
+int *generateArray(int *numbers) {
+    for(int i = 0; i < 100; i++){
+        numbers[i]=i+1;
     }
-    return evenNum;
+    return numbers;
 }
 
 /**
- * Llena un array de 50 posiciones con numeros impares desde el 1 al 100. Para ello, se lleva a cabo 
- * una division por 2, cuyo resto determinara si es impar. Cuando el resto de la division sea distinto de 
- * 0, sabremos que se trata de un numero impar y, por ende, se guarda dentro del array de los numeros impares.
- * @param oddNum Array vacio de 50 posiciones.
- * @param division Estructura de division.
- * @return Array con numeros impares del 1 al 100.
+ * 
+ * 
  */ 
-int *getOddNum(int *oddNum, div_t division) {
-    int y = 0;
-
-    for(int i = 1; i <= 100; i++){
-        division = div(i , 2);
-        if (division.rem != 0) {
-            oddNum[y] = i;
+int *getEvenOdd(int *numbers, int *evenNum, int *oddNum, div_t division) {
+    int x = 0, y = 0;
+    for(int i = 0; i < 100; i++) {
+        division = div(numbers[i] , 2);
+        if (division.rem == 0) {
+            evenNum[x] = numbers[i];
+            x++;
+        }
+        else{
+            oddNum[y] = numbers[i];
             y++;
         }
     }
-    return oddNum;
+    return evenNum, oddNum;
 }
 
-int main() {
-    const int MAX_ARRAY_SIZE = 50; 
-    
+
+
+
+void showArray (int order, int max, int *arrayNum, div_t division){
+    if (order == 0) {
+        printf("\t\t");
+        for(int i = 0; i < max; i++) {    
+            division = div(i + 1, 10);
+            printf("%d", arrayNum[i]);
+            if (i < 49) {
+                printf(" , ");
+                if (division.rem == 0) {
+                    printf("\n\t\t");    
+                }
+            }
+            else {
+                printf(".\n");
+            }
+        }
+    }
+    else if (order == 1) {
+        printf("\t\t");
+        for(int i = max - 1; i >= 0; i--) {
+            division = div(i, 10);    
+            printf("%d", arrayNum[i]);
+            if (i > 0) {
+                printf(" , ");
+                if (division.rem == 0) {
+                printf("\n\t\t");    
+                }
+            }
+            else {
+                printf(".\n");
+            }
+        }
+    } 
+}
+
+int main() { 
+
+    int numbers[ARRAY_SIZE];
+
     //Array de numeros pares.
-    int evenNum[MAX_ARRAY_SIZE];
+    int evenNum[ARRAY_SIZE];
 
     //Array de numeros impares.
-    int oddNum[MAX_ARRAY_SIZE];
+    int oddNum[ARRAY_SIZE];
 
     //Estructura que se utilizara para la division.
     div_t division;
 
-    getEvenNum(evenNum, division);
-    getOddNum(oddNum,division);
+    generateArray(numbers);
+    getEvenOdd(numbers, evenNum, oddNum, division);
+    
+    printf("\nNumeros pares:");
+    printf("\n\tOrden ascendente:\n");
+    showArray(ASC_ORDER, MAX_INDEX, evenNum, division);
+    printf("\n\tOrden descendente:\n");
+    showArray(DESC_ORDER, MAX_INDEX, evenNum, division);
 
-    printf("\nLos numeros pares son: ");
-    for(int i = 0; i < MAX_ARRAY_SIZE; i++){
-        printf("%d", evenNum[i]);
-        if (i < 49) {
-            printf(" , ");
-        }
-        else {
-            printf(".\n");
-        }
-    } 
+    printf("\nNumeros impares:");
+    printf("\n\tOrden ascendente:\n");
+    showArray(ASC_ORDER, MAX_INDEX, oddNum, division);
+    printf("\n\tOrden descendente:\n");
+    showArray(DESC_ORDER, MAX_INDEX, oddNum, division);
 
-    printf("\nLos numeros impares son: ");
-    for(int i = 0; i < MAX_ARRAY_SIZE; i++){
-        printf("%d", oddNum[i]);
-        if (i < 49) {
-            printf(" , ");
-        }
-        else {
-            printf(".\n");
-        }
-    }
 
+    printf(".........................................................................................\n");
     return 0;
 }
