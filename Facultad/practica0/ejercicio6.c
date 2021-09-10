@@ -11,11 +11,23 @@
  */  
 
 /**
+ * Genera el array de numeros ingresados por teclado.
+ * @param numbers Array de 10 posiciones vacio.
+ */ 
+void genArray(int *numbers) {
+    for(int i = 0; i < ARRAY_SIZE; i++) {
+        printf("> ");
+        scanf("%d", &numbers[i]);
+    }
+}
+
+/**
  * Ordena los numeros del array de forma ascendente.
  * @param numbers Array de 10 posiciones con numeros ingresados por teclado.
  * @param temp Variable temporal
  */  
-void orderNum(int *numbers, int temp) {
+void orderArray(int *numbers) {
+    int temp;
     for(int i = 0; i < ARRAY_SIZE - 1; i++) {
         for(int j = i+1; j < ARRAY_SIZE; j++) {
             if(numbers[j] < numbers[i]) {
@@ -27,19 +39,16 @@ void orderNum(int *numbers, int temp) {
     printf("%d, ", numbers[i]);
     }
 }
+
 int main() {
     int numbers[ARRAY_SIZE];
-    int temp;
 
     //Se guardan los 10 numeros que el usuario ingresa por teclado.
     printf("Ingrese 10 numeros:\n");
-    for(int i = 0; i < ARRAY_SIZE; i++) {
-        printf("> ");
-        scanf("%d", &numbers[i]);
-    }
+    genArray(numbers);
 
-    printf("Array ordenado: ");
-    orderNum(numbers, temp);
+    printf("\nArray ordenado de forma ascendente: ");
+    orderArray(numbers);
     
     return 0;
 }
