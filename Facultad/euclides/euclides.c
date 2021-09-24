@@ -27,12 +27,12 @@ int main() {
 /**
  * Realiza el calculo del maximo comun divisor: 
  * 
- * Se divide el numerador con el denominador y el residuo de dicha division es guardado dentro de la variable 'rest'.
+ * Se divide el numerador con el denominador y el residuo de dicha division es guardado dentro de la variable 'rest'. 
  * Luego se intercambian los valores de la siguiente manera: El numero que se encontraba en el denominador pasa al numerador, 
  * y el residuo de la division toma el lugar del denominador.
  *  
  * @param fn Puntero a fraccion definida en main().
- * @return Resto de la division para calcular el maximo comun divisor.
+ * @return Resto de la division con valores intercambiados para calcular el maximo comun divisor.
  */ 
 int mcd(fraccion *fn) {
     int rest;
@@ -51,7 +51,7 @@ int mcd(fraccion *fn) {
  * Reduce la fraccion: 
  * 
  * Realiza la division entre el numerador y denominador e intercambia valores hasta que el residuo sea igual a 0. 
- * Luego de que esto ocurre, se crea una nueva fraccion, cuyo numerador y denominador van a ser divididos por el maximo comun divisor.
+ * Luego de que esto ocurre, se crea una nueva fraccion, cuyo numerador y denominador van a ser divididos por el maximo comun divisor. 
  * 
  * Nota: El resultado final del maximo comun divisor, es el ultimo valor que tiene el numerador cuando 'rest' es igual a 0. 
  * 
