@@ -1,3 +1,5 @@
+//Trabajo de Leandro Gomez, comision 1.
+
 #include <stdio.h>
 
 /**
