@@ -25,7 +25,7 @@ int main() {
 }
 
 /**
- * Realiza calculos intermedios para definir del maximo comun divisor: 
+ * Realiza calculos intermedios para definir el maximo comun divisor: 
  * 
  * Se divide el numerador con el denominador y el resto de dicha division es guardado dentro de la variable 'rest'. 
  * Luego se intercambian los valores de la siguiente manera: El numero que se encontraba en el denominador pasa al numerador, 
