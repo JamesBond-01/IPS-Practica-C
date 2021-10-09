@@ -1,10 +1,12 @@
+//Trabajo de Leandro Gomez, comision 1.
+
 #include <stdio.h>
 
 /**
  * Estructura de la fraccion.
  */ 
 typedef struct {
-    int numerador, denominador ;
+    int numerador, denominador;
 } fraccion;
 
 int mcd(fraccion *);
@@ -25,19 +27,19 @@ int main() {
 }
 
 /**
- * Realiza el calculo del maximo comun divisor: 
+ * Realiza calculos intermedios para definir el maximo comun divisor: 
  * 
- * Se divide el numerador con el denominador y el residuo de dicha division es guardado dentro de la variable 'rest'. 
+ * Se divide el numerador con el denominador y el resto de dicha division es guardado dentro de la variable 'rest'. 
  * Luego se intercambian los valores de la siguiente manera: El numero que se encontraba en el denominador pasa al numerador, 
- * y el residuo de la division toma el lugar del denominador.
+ * y el resto de la division toma el lugar del denominador.
  *  
  * @param fn Puntero a fraccion definida en main().
- * @return Resto de la division con valores intercambiados para calcular el maximo comun divisor.
+ * @return Resto de la division con valores intercambiados.
  */ 
 int mcd(fraccion *fn) {
     int rest;
 
-    //Guardo el residuo de la division entre el numerador y el denominador.
+    //Guardo el resto de la division entre el numerador y el denominador.
     rest = fn->numerador % fn->denominador;
 
     //Intercambio de valores.
@@ -48,12 +50,12 @@ int mcd(fraccion *fn) {
 }
 
 /**
- * Reduce la fraccion: 
+ * Finaliza el calculo del mcd y reduce la fraccion: 
  * 
- * Realiza la division entre el numerador y denominador e intercambia valores hasta que el residuo sea igual a 0. 
- * Luego de que esto ocurre, se crea una nueva fraccion, cuyo numerador y denominador van a ser divididos por el maximo comun divisor. 
+ * Ejecuta la funcion mcd() hasta que el resto sea igual a 0. 
+ * Luego, se crea una nueva fraccion cuyo numerador y denominador van a ser divididos por el resultado final del mcd. 
  * 
- * Nota: El resultado final del maximo comun divisor, es el ultimo valor que tiene el numerador cuando 'rest' es igual a 0. 
+ * Nota: El resultado final del mcd, es el ultimo valor que tiene el numerador cuando 'rest' es igual a 0. 
  * 
  * @param fn Puntero a fraccion definida en main().
  * @return Fraccion reducida.
@@ -61,23 +63,23 @@ int mcd(fraccion *fn) {
 fraccion reduce(fraccion *fn) {
     int rest;
 
-    //Guardo los valores originales del numerador y denominador.
+    //Conservo los valores originales del numerador y denominador.
     int initialNum = fn->numerador;
     int initialDen = fn->denominador;
 
-    //Realizo la division de mcd() e intercambio los valores, hasta que 'rest' sea igual a 0. 
+    //Realizo los calculos de la funcion mcd() hasta que 'rest' sea igual a 0. 
     do {
         rest = mcd(fn);
     } while(rest > 0);
 
-    //Creo la fraccion reducida a partir de divisiones del numerador y denominador con el resultado final del maximo comun divisor.
+    //Defino e inicializo la nueva fraccion reducida, a partir de divisiones del numerador y denominador con el resultado final del mcd.
     fraccion redFraction = {initialNum / fn->numerador, initialDen / fn->numerador};
 
     return redFraction;
 }
 
 /**
- * Muestro la fraccion reducida en pantalla.
+ * Muestra la fraccion reducida.
  * @param redFraction Fraccion reducida.
  */  
 void muestraFraccion(fraccion redFraction) {
