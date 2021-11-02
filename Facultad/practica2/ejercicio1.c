@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 #include <malloc.h>
 #include <time.h>
 
@@ -21,53 +22,62 @@ void listGen(Archivo *lista, int i, int n);
 
 void showList(Archivo *lista, int i);
 
-void swap(char **string1, char **string2);
-
 void ordena_alfa(Archivo * lista, int n);
 
 void ordena_temporal(Archivo * lista, int n);
 
 
 int main() {
-	Tiempo t1, t2;
+	Tiempo t1, t2; //Variables qeu almacenan 2 fechas distintas.
 	Archivo *lista;
-	Archivo *pArchivo;
-	int n, menu, orden;
-	char restart;
+	Archivo *pArchivo; //Variable para guardar el puntero original de la lista.
+	int n, menu, orden; // "n" guarda la cantidad de elementos de una lista. "menu" se usa para realizar una operacion elegida por el usuario. "orden" es usada para elegir de que forma ordenar la lista.
+	char restart; //Variable para resetear el programa.
 
 	srand(time(0));
 
 	do {
-
 		printf("\nIngrese:\n\t1- Para realizar una comparacion entre 2 fechas.\n\t2- Para ordenar una lista de archivos.\n\t> ");
 		scanf("%d", &menu);
 
+		//Si el usuario ingresa 1, compara 2 fechas.
 		if(menu == 1) {
 			printf("\nA continuacion se le pediran varios datos basados en el tiempo.\nGracias por su paciencia.\n");
 			printf("\nPor favor, introduzca la siguiente informacion:\n");
 
+			//Ingresa todos los datos de ambas fechas.
 			dateCreator(&t1, &t2);
 
+			//Muestro resultado de la comparacion entre ambas fechas.
 			printf("El resultado es %d.\n", compara_tiempos(&t1, &t2));
 
+		//Si ingresa 2, ordena una lista de archivos.
 		} else if (menu == 2) {
 			printf("\nIngrese la cantidad de archivos que desee cargar en la lista: ");
 			scanf("%d", &n);
+
+			//getchar() para resolver conflictos entre scanf() y fgets()
 			getchar();
 
 			lista = (Archivo *)malloc(n * sizeof(Archivo));
+
+			//Guardo el puntero original de *lista.
 			pArchivo = lista;
 
+			//Genero la lista de archivos con sus respectivos nombres y fechas de modificacion.
 			for(int i = 1; i <= n; i++) {
 				listGen(lista, i, n);
 				*lista ++;
 			}
 
+			//Regreso *lista a su posicion original-
 			lista = pArchivo;
 
+			//Elijo el orden de la lista de archivos.
 			printf("\nIngrese:\n\t1- Para mostrar los archivos en orden default.\n\t2- Para ordenar los archivos en orden alfabetico.\n\t3- Para ordenar los archivos segun su ultima fecha de modificacion.\n\t> ");
 			scanf("%d", &orden);
 
+			//Si se ingresa 1, los archivos se muestran en el orden que fueron ingresados.
 			if(orden == 1) {
 				printf("\nArchivos en orden default:\n");
 				for(int i = 1; i <= n; i++) {
@@ -75,18 +85,23 @@ int main() {
 					*lista ++;
 				}
 
+			//Si el usuario ingresa 2, la lista de archivos se ordena por orden alfabetico.
 			} else if(orden == 2) {
 				ordena_alfa(lista, n);
 
+			//Si se elije la opcion 3, se ordena por su fecha de modificacion.
 			} else if(orden == 3) {
 				ordena_temporal(lista, n);
 
+			//Si se ingresa cualquier opcion distinta a las mencionadas, el programa sale con codigo de error.
 			} else {
+				printf("\nValor incorrecto. Vuelva a ejecutar el programa.\n");
 				exit(EXIT_FAILURE);
 			}
 
 			lista = pArchivo;
 
+			//Libero memoria reservada en el heap.
 			free(lista);
 			lista = NULL;
 
@@ -99,6 +114,7 @@ int main() {
 	scanf(" %c", &restart);
 	getchar();
 
+	//Opcion de reiniciar el programa.
 	} while (restart == 'y' || restart == 'Y');
 
 	return 0;
@@ -106,7 +122,7 @@ int main() {
 
 /**
  * Esta funcion toma datos detallados sobre una fecha ingresados por el usuario.
- * También se verificará de que el usaurio haya ingresado los datos de manera correcta.
+ * Tambien se verifica que el usuario haya ingresado los datos de manera correcta.
  *
  * Luego de que el usuario carga todos los datos, se muestra con un formato especifico
  * para un mejor orden de los mismos.
@@ -119,7 +135,7 @@ void dateCreator(Tiempo *t1, Tiempo *t2) {
 	printf("\n\t\tTiempo 1\n");
 	printf("===============================\n");
 
-	printf("\n\t\t\tAño: ");
+	printf("\n\t\t\tAnio: ");
 	scanf("%d", &t1->anio);
 
 	printf("\t\t\tMes: ");
@@ -167,7 +183,7 @@ void dateCreator(Tiempo *t1, Tiempo *t2) {
 	printf("\n\t\tTiempo 2\n");
 	printf("===============================\n");
 
-	printf("\n\t\t\tAño: ");
+	printf("\n\t\t\tAnio: ");
 	scanf("%d", &t2->anio);
 
 	printf("\t\t\tMes: ");
@@ -210,10 +226,10 @@ void dateCreator(Tiempo *t1, Tiempo *t2) {
 		scanf("%d", &t2->segundo);
 	}
 
-	// Muestro las dos fechas ingresadas de forma ordenada para que pueda ser leída fácilmente.
+	// Muestro las dos fechas ingresadas de forma ordenada para que pueda ser leida facilmente.
 	printf("\n========================================================");
-	printf("\nFecha 1 (YY/MM/DD):  %d/%d/%d - %d:%d:%d\n", t1->anio, t1->mes, t1->dia, t1->hora, t1->minuto, t1->segundo);
-	printf("\nFecha 2 (YY/MM/DD):  %d/%d/%d - %d:%d:%d\n", t2->anio, t2->mes, t2->dia, t2->hora, t2->minuto, t2->segundo);
+	printf("\nFecha 1 (YY/MM/DD):  %d/%d/%d - %d:%d.%d\n", t1->anio, t1->mes, t1->dia, t1->hora, t1->minuto, t1->segundo);
+	printf("\nFecha 2 (YY/MM/DD):  %d/%d/%d - %d:%d.%d\n", t2->anio, t2->mes, t2->dia, t2->hora, t2->minuto, t2->segundo);
 	printf("\n========================================================");
 }
 
@@ -293,10 +309,17 @@ int compara_tiempos(Tiempo *t1, Tiempo *t2) {
 
 }
 
-
+/**
+ * La siguiente funcion genera archivos a partir de datos cargados por el usuario como la cantidad de archivos de la lista y nombres
+ * de los mismos. Las fechas de modificacion son generadas de forma aleatoria.
+ *
+ * @param Archivo *lista: puntero a estructura del tipo Archivo.
+ * @param int n: variable que contiene la cantidad de archivos de la lista.
+ * @param int i: contador para mostrar el numero de archivo a ingresar.
+ */
 void listGen(Archivo *lista, int i, int n) {
 
-	lista->nombre = (char *)malloc((n * 10) * sizeof(char));
+	lista->nombre = (char *)malloc((n * 100) * sizeof(char));
 
 	printf("Ingrese nombre del archivo %d: ", i);
 	fgets(lista->nombre,10,stdin);
@@ -310,60 +333,68 @@ void listGen(Archivo *lista, int i, int n) {
 
 }
 
+/**
+ * Funcion para mostrar los datos de los archivos con un formato prolijo y ordenado.
+ * @param Archivo *lista: puntero a estructura del tipo Archivo.
+ * @param int i: contador para mostrar el numero de archivo.
+ */
 void showList(Archivo *lista, int i) {
-	printf("\nNombre del archivo %d: %s - Ultima modificacion: (YY/MM/DD): %d/%d/%d - %d:%d:%d\n", i, lista->nombre, lista->ultima_mod.anio, lista->ultima_mod.mes,
+	printf("\nNombre del archivo %d: %s - Ultima modificacion: (YY/MM/DD): %d/%d/%d - %d:%d.%d\n", i, lista->nombre, lista->ultima_mod.anio, lista->ultima_mod.mes,
 	lista->ultima_mod.dia, lista->ultima_mod.hora, lista->ultima_mod.minuto, lista->ultima_mod.segundo);
 }
 
-
-void swap(char **string1, char **string2) {
-	char *tmp;
-
-	tmp = *string2;
-	*string2 = *string1;
-	*string1 = tmp;
-}
-
-
+/**
+ * La funcion ordena alfabeticamente los archivos de la lista basados en sus respectivos nombres.
+ * Para ordenar los mismos, se recorre la lista desde el primer elemento hasta el ultimo comparando los nombres
+ * con la funcion strcmp(), que devuelve un numero positivo si el primer nombre es mayor que el segundo, 0 si los nombres son iguales
+ * o un numero negativo si el primer nombre es menor que el segundo.
+ *
+ * Teniendo esto ultimo en cuenta, evaluamos si el primer nombre es mayor que el segundo. En caso de que esto se cumpla, se intercambian
+ * los archivos entre si. Estas comparaciones e intercambios se realizan continuamente hasta que toda la lista se encuentre ordenada
+ * en orden alfabetico.
+ *
+ * @param Archivo *lista: puntero a estructura del tipo Archivo.
+ * @param int n: variable que contiene la cantidad de archivos de la lista.
+ */
 void ordena_alfa(Archivo *lista, int n) {
-	int compare, disorder;
-	char *string1;
-	char *string2;
-	char *tmp;
-	Archivo *pA_Lista;
-
-	pA_Lista = lista;
+	int compare; //Variable para guardar el resultado de strcmp().
+	bool disordered; //Variable que se utiliza como flag.
+	char* nombreArchivoPrev; //Variable donde se guarda el nombre del archivo anterior en la lista.
+	char* nombreArchivoCurr; //Variable donde se guarda el nombre del archivo actual en la lista.
+	char* nombreArchivoTemp; //Variable para guardar un nombre de forma temporal para realizar el intercambio.
 
 	do {
-		disorder = 0;
+		disordered = false;
 
-		for(int i = 1; i < n; i++) {
+		for(int i = 0; i < n; i++) {
 
-			string1 = lista->nombre;
-			*lista ++;
-			string2 = lista->nombre;
+			// Primer elemento de la lista, no hay nada que comparar.
+			if (i == 0) {
+				continue;
+			}
 
-			compare = strcmp(string1, string2);
+			nombreArchivoPrev = lista[i-1].nombre;
+			nombreArchivoCurr = lista[i].nombre;
 
+			//Comparo nombres.
+			compare = strcmp(nombreArchivoPrev, nombreArchivoCurr);
+
+			//Evaluo si el primer nombre es mayor que el segundo. De ser asi,
+			//realizo un intercambio de posiciones entre ellos.
 			if(compare > 0) {
-				//swap(&string1, &string2);
+				nombreArchivoTemp = nombreArchivoCurr;
+				lista[i].nombre = nombreArchivoPrev;
+				lista[i-1].nombre = nombreArchivoTemp;
 
-				tmp = string2;
-				string2 = string1;
-				string1 = tmp;
-
-				disorder = 1;
+				disordered = true;
 			}
 		}
 
-		lista = pA_Lista;
-
-	} while(disorder == 1);
+	} while(disordered);
 
 	printf("\nLista ordenada:\n");
 
-	lista = pA_Lista;
-
+	//Muestro la lista ordenada alfabeticamente.
 	for(int i = 1; i <= n; i++) {
 		showList(lista, i);
 		*lista ++;
