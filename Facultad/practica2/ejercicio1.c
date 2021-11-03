@@ -20,7 +20,7 @@ int compara_tiempos(Tiempo *t1, Tiempo * t2);
 
 void listGen(Archivo *lista, int i, int n);
 
-void showList(Archivo *lista, int i);
+void showList(Archivo *lista);
 
 void ordena_alfa(Archivo * lista, int n);
 
@@ -31,8 +31,8 @@ int main() {
 	Tiempo t1, t2; //Variables qeu almacenan 2 fechas distintas.
 	Archivo *lista;
 	Archivo *pArchivo; //Variable para guardar el puntero original de la lista.
-	int n, menu, orden; // "n" guarda la cantidad de elementos de una lista. "menu" se usa para realizar una operacion elegida por el usuario. "orden" es usada para elegir de que forma ordenar la lista.
-	char restart; //Variable para resetear el programa.
+	int n, menu, orden, timeComparison; // "n" guarda la cantidad de elementos de una lista. "menu" se usa para realizar una operacion elegida por el usuario. "orden" es usada para elegir de que forma ordenar la lista.
+	char restart; //Variable para reiniciar el programa.
 
 	srand(time(0));
 
@@ -49,7 +49,21 @@ int main() {
 			dateCreator(&t1, &t2);
 
 			//Muestro resultado de la comparacion entre ambas fechas.
-			printf("El resultado es %d.\n", compara_tiempos(&t1, &t2));
+			timeComparison = compara_tiempos(&t1, &t2);
+			printf("El resultado es %d.\n", timeComparison);
+
+			if(timeComparison == 1) {
+				printf("\nFecha 1 es anterior a Fecha 2.\n");
+			}
+
+
+			else if(timeComparison == -1) {
+				printf("\nFecha 1 es posterior a Fecha 2.\n");
+			}
+
+			else if(timeComparison == 0) {
+				printf("\nFecha 1 es igual a fecha 2.\n");
+			}
 
 		//Si ingresa 2, ordena una lista de archivos.
 		} else if (menu == 2) {
@@ -81,7 +95,7 @@ int main() {
 			if(orden == 1) {
 				printf("\nArchivos en orden default:\n");
 				for(int i = 1; i <= n; i++) {
-					showList(lista, i);
+					showList(lista);
 					*lista ++;
 				}
 
@@ -154,7 +168,7 @@ void dateCreator(Tiempo *t1, Tiempo *t2) {
 		scanf("%d", &t1->dia);
 	}
 
-	printf("\n\t\t\tHora (formato 24hs): ");
+	printf("\t\t\tHora (formato 24hs): ");
 	scanf("%d", &t1->hora);
 
 	while(t1->hora > 24) {
@@ -250,60 +264,47 @@ int compara_tiempos(Tiempo *t1, Tiempo *t2) {
 				if(t1->hora == t2->hora) {
 					if(t1->minuto == t2->minuto) {
 						if(t1->segundo == t2->segundo) {
-							printf("\nFecha 1 es igual a fecha 2.\n");
 							return 0;
 						}
 						else if(t1->segundo > t2->segundo) {
-							printf("\nFecha 1 es posterior a Fecha 2.\n");
 							return -1;
 						}
 						else if(t1->segundo < t2->segundo) {
-							printf("\nFecha 1 es anterior a Fecha 2.\n");
 							return 1;
 						}
 					}
 					else if(t1->minuto > t2->minuto) {
-						printf("\nFecha 1 es posterior a Fecha 2.\n");
 						return -1;
 					}
 					else if(t1->minuto < t2->minuto) {
-						printf("\nFecha 1 es anterior a Fecha 2.\n");
 						return 1;
 					}
 				}
 				else if(t1->hora > t2->hora) {
-					printf("\nFecha 1 es posterior a Fecha 2.\n");
 					return -1;
 				}
 				else if(t1->hora < t2->hora) {
-					printf("\nFecha 1 es anterior a Fecha 2.\n");
 					return 1;
 				}
 			}
 			else if(t1->dia > t2->dia) {
-				printf("\nFecha 1 es posterior a Fecha 2.\n");
 				return -1;
 			}
 			else if(t1->dia < t2->dia) {
-				printf("\nFecha 1 es anterior a Fecha 2.\n");
 				return 1;
 			}
 		}
 		else if(t1->mes > t2->mes) {
-			printf("\nFecha 1 es posterior a Fecha 2.\n");
 			return -1;
 		}
 		else if(t1->mes < t2->mes) {
-			printf("\nFecha 1 es anterior a Fecha 2.\n");
 			return 1;
 		}
 	}
 	else if(t1->anio > t2->anio) {
-		printf("\nFecha 1 es posterior a Fecha 2.\n");
 		return -1;
 	}
 	else if(t1->anio < t2->anio) {
-		printf("\nFecha 1 es anterior a Fecha 2.\n");
 		return 1;
 	}
 
@@ -319,10 +320,10 @@ int compara_tiempos(Tiempo *t1, Tiempo *t2) {
  */
 void listGen(Archivo *lista, int i, int n) {
 
-	lista->nombre = (char *)malloc((n * 100) * sizeof(char));
+	lista->nombre = (char *)malloc(100 * sizeof(char));
 
 	printf("Ingrese nombre del archivo %d: ", i);
-	fgets(lista->nombre,10,stdin);
+	fgets(lista->nombre,100,stdin);
 
 	lista->ultima_mod.anio = 2000 + (rand() % 22);
 	lista->ultima_mod.mes = 1 + (rand() % 12);
@@ -338,9 +339,9 @@ void listGen(Archivo *lista, int i, int n) {
  * @param Archivo *lista: puntero a estructura del tipo Archivo.
  * @param int i: contador para mostrar el numero de archivo.
  */
-void showList(Archivo *lista, int i) {
-	printf("\nNombre del archivo %d: %s - Ultima modificacion: (YY/MM/DD): %d/%d/%d - %d:%d.%d\n", i, lista->nombre, lista->ultima_mod.anio, lista->ultima_mod.mes,
-	lista->ultima_mod.dia, lista->ultima_mod.hora, lista->ultima_mod.minuto, lista->ultima_mod.segundo);
+void showList(Archivo *lista) {
+	printf("%d/%d/%d-%d:%d.%d\t%s",lista->ultima_mod.dia, lista->ultima_mod.mes, lista->ultima_mod.anio,
+	lista->ultima_mod.hora, lista->ultima_mod.minuto, lista->ultima_mod.segundo, lista->nombre);
 }
 
 /**
@@ -357,7 +358,7 @@ void showList(Archivo *lista, int i) {
  * @param int n: variable que contiene la cantidad de archivos de la lista.
  */
 void ordena_alfa(Archivo *lista, int n) {
-	int compare; //Variable para guardar el resultado de strcmp().
+	int comparison; //Variable para guardar el resultado de strcmp().
 	bool disordered; //Variable que se utiliza como flag.
 	char* nombreArchivoPrev; //Variable donde se guarda el nombre del archivo anterior en la lista.
 	char* nombreArchivoCurr; //Variable donde se guarda el nombre del archivo actual en la lista.
@@ -377,11 +378,11 @@ void ordena_alfa(Archivo *lista, int n) {
 			nombreArchivoCurr = lista[i].nombre;
 
 			//Comparo nombres.
-			compare = strcmp(nombreArchivoPrev, nombreArchivoCurr);
+			comparison = strcmp(nombreArchivoPrev, nombreArchivoCurr);
 
 			//Evaluo si el primer nombre es mayor que el segundo. De ser asi,
 			//realizo un intercambio de posiciones entre ellos.
-			if(compare > 0) {
+			if(comparison > 0) {
 				nombreArchivoTemp = nombreArchivoCurr;
 				lista[i].nombre = nombreArchivoPrev;
 				lista[i-1].nombre = nombreArchivoTemp;
@@ -396,11 +397,52 @@ void ordena_alfa(Archivo *lista, int n) {
 
 	//Muestro la lista ordenada alfabeticamente.
 	for(int i = 1; i <= n; i++) {
-		showList(lista, i);
+		showList(lista);
 		*lista ++;
 	}
 }
 
+/**
+ * Esta funcion ordena los archivos por fecha.
+ *
+ * @param Archivo *lista: puntero a estructura del tipo Archivo.
+ * @param int n: variable que contiene la cantidad de archivos de la lista.
+ */
 void ordena_temporal(Archivo *lista, int n) {
+	bool disordered;
+	int comparison;
+	Tiempo tmp;
+	Tiempo fechaPrev;
+	Tiempo fechaCurr;
+
+	do {
+		disordered = false;
+
+		for(int i = 0; i < n; i++) {
+			if(i == 0) {
+				continue;
+			}
+
+			fechaPrev = lista[i - 1].ultima_mod;
+			fechaCurr = lista[i].ultima_mod;
+
+			comparison = compara_tiempos(&fechaPrev, &fechaCurr);
+			if(comparison == 1) {
+				tmp = fechaCurr;
+				lista[i].ultima_mod = fechaPrev;
+				lista[i - 1].ultima_mod = fechaCurr;
+				disordered = true;
+			}
+		}
+
+	} while(disordered);
+
+	printf("\nLista ordenada:\n");
+
+	//Muestro la lista ordenada por su fecha de modificacion.
+	for(int i = 1; i <= n; i++) {
+		showList(lista);
+		*lista ++;
+	}
 
 }
