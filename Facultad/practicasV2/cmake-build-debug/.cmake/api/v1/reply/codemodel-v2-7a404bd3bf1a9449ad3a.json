@@ -49,8 +49,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "/home/leandro/Documents/practica/cmake-build-debug",
-		"source" : "/home/leandro/Documents/practica"
+		"build" : "/home/leandro/workspace/IPS-practica-c/Facultad/practicasV2/cmake-build-debug",
+		"source" : "/home/leandro/workspace/IPS-practica-c/Facultad/practicasV2"
 	},
 	"version" : 
 	{

@@ -1,4 +1,4 @@
-# Install script for directory: /home/leandro/Documents/practica
+# Install script for directory: /home/leandro/workspace/IPS-practica-c/Facultad/practicasV2
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/leandro/Documents/practica/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/leandro/workspace/IPS-practica-c/Facultad/practicasV2/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

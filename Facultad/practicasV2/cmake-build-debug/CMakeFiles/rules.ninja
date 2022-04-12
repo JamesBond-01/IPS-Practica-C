@@ -42,7 +42,7 @@ rule C_EXECUTABLE_LINKER__practica_Debug
 # Rule for re-running cmake.
 
 rule RERUN_CMAKE
-  command = /snap/clion/184/bin/cmake/linux/bin/cmake --regenerate-during-build -S/home/leandro/Documents/practica -B/home/leandro/Documents/practica/cmake-build-debug
+  command = /snap/clion/184/bin/cmake/linux/bin/cmake --regenerate-during-build -S/home/leandro/workspace/IPS-practica-c/Facultad/practicasV2 -B/home/leandro/workspace/IPS-practica-c/Facultad/practicasV2/cmake-build-debug
   description = Re-running CMake...
   generator = 1
 
