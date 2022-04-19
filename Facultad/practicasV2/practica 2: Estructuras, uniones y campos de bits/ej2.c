@@ -12,7 +12,7 @@ typedef struct {
 } Polinomio;
 
 Polinomio * creaPolinomio(int orden);
-void setCoef(int n, double c, Polinomio * P);
+void setCoef(int i, int n, double c, Polinomio * P);
 double getCoef(int n, Polinomio * P);
 double especializa( double x, Polinomio * P );
 Polinomio * sum( Polinomio *p1, Polinomio *p2);
@@ -29,27 +29,25 @@ int main() {
     scanf("%d", &orden);
 
     polinomio = creaPolinomio(orden);
-    setCoef(polinomio->n, *polinomio->coeficiente, polinomio);
+
     for(int i = 0; i <= orden; i++) {
+        setCoef(i, polinomio->n, polinomio->coeficiente[i], polinomio);
         polinomio->coeficiente[i] = getCoef(polinomio->n, polinomio);
         printf("Coeficiente %f", polinomio->coeficiente[i]);
     }
 }
 
 Polinomio *creaPolinomio(int orden) {
-    Polinomio *polinomio;
-
+    Polinomio *polinomio = (Polinomio *) malloc(sizeof(Polinomio));
     polinomio->n = orden;
     polinomio->coeficiente = (double *) malloc((orden + 1) * sizeof(double));
 
     return polinomio;
 }
 
-void setCoef(int n, double c, Polinomio * P) {
+void setCoef(int i, int n, double c, Polinomio * P) {
     c = n + 1;
-    for(int i = 0; i < c; i++) {
-        P->coeficiente[i] = pow(n, i);
-    }
+    P->coeficiente[i] = pow(c, i); //Si no funciona al compilar, agregar "-lm" al final del comando. e.g: gcc ej2.c -lm
 }
 
 double getCoef(int n, Polinomio * P) {
