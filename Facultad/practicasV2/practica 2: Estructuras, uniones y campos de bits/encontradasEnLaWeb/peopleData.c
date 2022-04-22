@@ -1,6 +1,7 @@
 /*Hacer una estructura que registre los datos de cinco personas como: Nombre, apellido, edad, sexo y teléfono.*/
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <malloc.h>
 
 #define TOTAL_PEOPLE 3
@@ -19,7 +20,7 @@ Person *getData();
 int main() {
     Person *people;
 
-    printf("Por favor ingrese los datos de las siguientes %i personas.\n", TOTAL_PEOPLE);
+    printf("Por favor ingrese los datos de las siguientes %d personas.\n", TOTAL_PEOPLE);
     people = getData();
 
 

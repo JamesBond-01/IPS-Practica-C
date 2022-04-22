@@ -1,0 +1,2 @@
+/mnt/c/Users/Family/Desktop/Leandro/Ejercicios de programacion/workspace/IPS-practica-c/Facultad/practicasV2/cmake-build-default/CMakeFiles/edit_cache.dir
+/mnt/c/Users/Family/Desktop/Leandro/Ejercicios de programacion/workspace/IPS-practica-c/Facultad/practicasV2/cmake-build-default/CMakeFiles/rebuild_cache.dir
