@@ -1,10 +1,9 @@
 /*Hacer una estructura que registre los datos de cinco personas como: Nombre, apellido, edad, sexo y teléfono.*/
 
 #include <stdio.h>
-#include <stdlib.h>
 #include <malloc.h>
 
-#define TOTAL_PEOPLE 3
+#define TOTAL_PEOPLE 2
 #define MAX_CHARACTERS 10
 
 typedef struct person {
