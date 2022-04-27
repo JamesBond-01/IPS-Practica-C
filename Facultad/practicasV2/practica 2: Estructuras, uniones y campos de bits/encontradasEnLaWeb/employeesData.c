@@ -59,9 +59,9 @@ void dataInput(Employee *employees) {
     }
 }
 /*
- * La funcion algCalc() calcula al edad de cada empleado en base a su fecha de nacimiento y
- * a la fecha actual. Es decir, si un empleado todavia no cumplio los años al momento de la fecha,
- * se calcula su edad restandole 1 a la diferencia entre el año actual y el de nacimiento.
+ * La funcion algCalc() calcula la edad de cada empleado teniendo en cuenta su fecha de nacimiento y
+ * a la fecha actual. Es decir, si un empleado todavía no cumplió los años al momento de la fecha,
+ * se calcula su edad restándole 1 a la diferencia entre el año actual y el de nacimiento.
  */
 int ageCalc(Employee *employees) {
     Date currentDate, *tm;
