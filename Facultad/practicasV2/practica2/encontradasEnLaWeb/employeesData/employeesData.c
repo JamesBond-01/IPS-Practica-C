@@ -27,7 +27,7 @@ int main() {
 }
 
 /*
- * Con esta función, tomo los datos de cada empleado.
+ * Con esta funcion, tomo los datos de cada empleado.
  * @param Employee *employees: Estructura donde se almacenan los datos de los empleados.
  */
 void dataInput(Employee *employees) {
@@ -59,7 +59,7 @@ void dataInput(Employee *employees) {
     }
 }
 /*
- * La función algCalc() calcula la edad de cada empleado teniendo en cuenta su fecha de nacimiento y
+ * La funcion algCalc() calcula la edad de cada empleado teniendo en cuenta su fecha de nacimiento y
  * a la fecha actual. Es decir, si un empleado todavía no cumplió los años al momento de la fecha,
  * se calcula su edad restándole 1 a la diferencia entre el año actual y el de nacimiento.
  */
@@ -86,7 +86,7 @@ int ageCalc(Employee *employees) {
 }
 void showData(Employee *employees) {
     printf("==============================================\n");
-    printf("Información ingresada sobre los empleados:\n");
+    printf("Informacion ingresada sobre los empleados:\n");
     for (int i = 0; i < TOTAL_EMPLOYEES; i++) {
         printf("Empleado N°%d\n", i + 1);
         printf("\tNombre: %s", employees->name);
