@@ -1,3 +1,0 @@
-/home/leandro/workspace/IPS-practica-c/Algorithms Tests/cmake-build-debug/CMakeFiles/Algorithms_Tests.dir
-/home/leandro/workspace/IPS-practica-c/Algorithms Tests/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/leandro/workspace/IPS-practica-c/Algorithms Tests/cmake-build-debug/CMakeFiles/rebuild_cache.dir
