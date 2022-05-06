@@ -1,0 +1,6 @@
+Nombre       Apellido      Edad
+------       --------      ----
+Marcelo		Gomez 			52
+Carina 		Torres			50
+Leandro		Gomez 			20
+Lucia  		Gomez 			17
