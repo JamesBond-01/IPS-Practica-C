@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.22)
-project(randomAccess C)
+project(pila C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(randomAccess main.c)
+add_executable(pila main.c)
