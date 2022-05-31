@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-#define STACK_SIZE 5
+#define STACK_SIZE 10
 
 void push(int *stack, int data);
 int pop(const int *stack, int data);
@@ -18,31 +18,36 @@ int main() {
     char option;
 
     do {
-        printf("============================================\n");
-        printf("Ingrese alguna de las siguientes opciones.\n");
-        printf("============================================\n");
-        printf("\t1. Agregar un elemento.\n");
-        printf("\t2. Eliminar un elemento.\n");
-        printf("\t3. Obtener el valor del ultimo elemento.\n");
-        printf("> ");
-        scanf("%d", &menu);
-        switch(menu) {
-            case 1:
-                printf("Ingrese el elemento que desea agregar: ");
-                scanf("%d", &element);
-                push(stack, element);
-                break;
-            case 2:
-                printf("Eliminando elemento...\n");
-                element = pop(stack, element);
-                break;
-            case 3:
-                printf("El ultimo elemento en el stack es: %d", peek(stack));
-                break;
-            default:
-                printf("El valor ingresado no coincide con las opciones.\n");
-                break;
-        }
+        do {
+            system("clear");
+            printf("============================================\n");
+            printf("Ingrese alguna de las siguientes opciones.\n");
+            printf("============================================\n");
+            printf("\t1. Agregar un elemento.\n");
+            printf("\t2. Eliminar un elemento.\n");
+            printf("\t3. Obtener el valor del ultimo elemento.\n");
+            printf("> ");
+            scanf("%d", &menu);
+            switch(menu) {
+                case 1:
+                    printf("Ingrese el elemento que desea agregar: ");
+                    scanf("%d", &element);
+                    push(stack, element);
+                    break;
+                case 2:
+                    printf("Eliminando elemento...\n");
+                    element = pop(stack, element);
+                    break;
+                case 3:
+                    printf("El ultimo elemento en el stack es: %d.\n", peek(stack));
+                    break;
+                default:
+                    printf("El valor ingresado no coincide con las opciones.\n");
+                    break;
+            }
+            printf("Desea realizar otra operacion? [Y/N]: ");
+            scanf(" %c", &option);
+        } while(option == 'y' || option == 'Y');
         printf("Desea reintentar? [Y/N]: ");
         scanf(" %c", &option);
     } while(option == 'y' || option == 'Y');
@@ -52,6 +57,8 @@ int main() {
         printf("\t%d\n", element);
         element = pop(stack, element);
     }
+
+    free(stack);
 
     return 0;
 }
