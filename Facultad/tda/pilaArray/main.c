@@ -4,16 +4,17 @@
 
 #define STACK_SIZE 10
 
-void push(int *stack, int data);
-int pop(const int *stack, int data);
+void push(int data);
+int pop(int data);
 bool isFull();
 bool isEmpty();
-int peek(const int *stack);
+int peek();
+int size();
 
 int top = -1;
+int stack[STACK_SIZE];
 
 int main() {
-    int *stack = (int *)malloc(STACK_SIZE * sizeof(int));
     int menu, element;
     char option;
 
@@ -26,20 +27,30 @@ int main() {
             printf("\t1. Agregar un elemento.\n");
             printf("\t2. Eliminar un elemento.\n");
             printf("\t3. Obtener el valor del ultimo elemento.\n");
+            printf("\t4. Obtener el total de elementos en la lista.\n");
+            printf("\t5. Mostrar la lista.\n");
             printf("> ");
             scanf("%d", &menu);
             switch(menu) {
                 case 1:
                     printf("Ingrese el elemento que desea agregar: ");
                     scanf("%d", &element);
-                    push(stack, element);
+                    push(element);
                     break;
                 case 2:
-                    printf("Eliminando elemento...\n");
-                    element = pop(stack, element);
+                    element = pop(element);
+                    printf("Elemento %d eliminado con exito.\n", element);
                     break;
                 case 3:
-                    printf("El ultimo elemento en el stack es: %d.\n", peek(stack));
+                    printf("El ultimo elemento en el stack es: %d.\n", peek());
+                    break;
+                case 4:
+                    printf("La lista tiene un total de %d elementos.\n", size());
+                    break;
+                case 5:
+                    for(int i = top; i >= 0; i--) {
+                        printf("\t%d\n", stack[i]);
+                    }
                     break;
                 default:
                     printf("El valor ingresado no coincide con las opciones.\n");
@@ -52,18 +63,10 @@ int main() {
         scanf(" %c", &option);
     } while(option == 'y' || option == 'Y');
 
-    printf("Elementos del stack:\n");
-    while(!isEmpty()) {
-        printf("\t%d\n", element);
-        element = pop(stack, element);
-    }
-
-    free(stack);
-
     return 0;
 }
 
-void push(int *stack, int data) {
+void push(int data) {
     if(!isFull()) {
         top = top + 1;
         stack[top] = data;
@@ -71,10 +74,10 @@ void push(int *stack, int data) {
         printf("Error al agregar un elemento. Stack lleno.\n");
     }
 }
-int pop(const int *stack, int data) {
+int pop(int data) {
     if(!isEmpty()) {
-        top = top - 1;
         data = stack[top];
+        top = top - 1;
         return data;
     } else {
         printf("Error al eliminar un elemento. Stack vacio.\n");
@@ -95,6 +98,9 @@ bool isFull() {
         return false;
     }
 }
-int peek(const int *stack) {
+int peek() {
     return stack[top];
+}
+int size() {
+    return top + 1;
 }
