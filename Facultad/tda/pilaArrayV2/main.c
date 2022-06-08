@@ -11,7 +11,7 @@ bool isEmpty();
 int peek();
 int size();
 
-int top = -1;
+int first = -1;
 int stack[STACK_SIZE];
 
 int main() {
@@ -48,7 +48,7 @@ int main() {
                 break;
             case 5:
                 printf("Mostrando stack en pantalla...\n");
-                for (int i = top; i >= 0; i--) {
+                for (int i = 0; i <= first; i++) {
                     printf("\t%d\n", stack[i]);
                 }
                 printf("\n");
@@ -65,16 +65,22 @@ int main() {
 
 void push(int data) {
     if(!isFull()) {
-        top = top + 1;
-        stack[top] = data;
+        first = first + 1;
+        for(int i = first; i > 0; i--) {
+            stack[i] = stack[i - 1];
+        }
+        stack[0] = data;
     } else {
         printf("Error al agregar un elemento. Stack lleno.\n");
     }
 }
 int pop(int data) {
     if(!isEmpty()) {
-        data = stack[top];
-        top = top - 1;
+        data = stack[0];
+        for(int i = 0; i < first; i++) {
+            stack[i] = stack[i + 1];
+        }
+        first = first - 1;
         return data;
     } else {
         printf("Error al eliminar un elemento. Stack vacio.\n");
@@ -82,22 +88,22 @@ int pop(int data) {
     }
 }
 bool isEmpty() {
-    if(top == -1) {
+    if(first == -1) {
         return true;
     } else {
         return false;
     }
 }
 bool isFull() {
-    if(top == STACK_SIZE) {
+    if(first == STACK_SIZE) {
         return true;
     } else {
         return false;
     }
 }
 int peek() {
-    return stack[top];
+    return stack[first];
 }
 int size() {
-    return top + 1;
+    return first + 1;
 }
