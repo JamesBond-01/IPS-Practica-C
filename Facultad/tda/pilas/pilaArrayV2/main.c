@@ -1,3 +1,8 @@
+/**
+ * Este programa, a diferencia de pilaArray, almacena el ultimo elemento ingresado en la primera posicion del array.
+ * Es decir, el ultimo numero se guarda en stack[0].
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -22,36 +27,47 @@ int main() {
     printf("Ingrese alguna de las siguientes opciones.\n");
     printf("============================================\n");
     while(1) {
-        printf("\t1. Agregar un elemento.\n");
-        printf("\t2. Eliminar un elemento.\n");
-        printf("\t3. Obtener el valor del ultimo elemento.\n");
-        printf("\t4. Obtener el total de elementos en la lista.\n");
+        printf("\t1. Agregar un numero.\n");
+        printf("\t2. Eliminar un numero.\n");
+        printf("\t3. Obtener el valor del ultimo numero ingresado.\n");
+        printf("\t4. Obtener el total de numeros almacenados en la lista.\n");
         printf("\t5. Mostrar la lista.\n");
         printf("\t6. Salir.\n");
         printf("> ");
         scanf("%d", &menu);
         switch (menu) {
             case 1:
-                printf("Ingrese el elemento que desea agregar: ");
-                scanf("%d", &element);
-                push(element);
+                if(!isFull()) {
+                    printf("Ingrese el elemento que desea agregar: ");
+                    scanf("%d", &element);
+                    push(element);
+                } else {
+                    printf("No se pueden agregar mas elementos a la lista.\n");
+                }
                 break;
             case 2:
-                element = pop(element);
-                printf("Elemento %d eliminado con exito.\n", element);
+                if(!isEmpty()) {
+                    element = pop(element);
+                } else {
+                    printf("Lista vacia. No se pueden eliminar mas elementos.\n");
+                }
                 break;
             case 3:
-                printf("El ultimo elemento en el stack es: %d.\n", peek());
+                printf("El ultimo elemento en el stack es el numero %d.\n", peek());
                 break;
             case 4:
                 printf("La lista tiene un total de %d elementos.\n", size());
                 break;
             case 5:
-                printf("Mostrando stack en pantalla...\n");
-                for (int i = 0; i <= first; i++) {
-                    printf("\t%d\n", stack[i]);
+                if(first == -1) {
+                    printf("Error al mostrar el stack: se encuentra vacio.\n");
+                } else {
+                    printf("Mostrando stack en pantalla...\n");
+                    for (int i = 0; i <= first; i++) {
+                        printf("\t%d\n", stack[i]);
+                    }
+                    printf("\n");
                 }
-                printf("\n");
                 break;
             case 6:
                 system("clear");
@@ -81,6 +97,7 @@ int pop(int data) {
             stack[i] = stack[i + 1];
         }
         first = first - 1;
+        printf("Elemento %d eliminado con exito.\n", data);
         return data;
     } else {
         printf("Error al eliminar un elemento. Stack vacio.\n");
@@ -95,14 +112,19 @@ bool isEmpty() {
     }
 }
 bool isFull() {
-    if(first == STACK_SIZE) {
+    if(first == STACK_SIZE -1) {
         return true;
     } else {
         return false;
     }
 }
 int peek() {
-    return stack[first];
+    if(!isEmpty()) {
+        return stack[0];
+    } else {
+        printf("El stack se encuentra vacio.\n");
+        return 0;
+    }
 }
 int size() {
     return first + 1;
