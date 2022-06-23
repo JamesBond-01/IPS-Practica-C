@@ -1,10 +1,11 @@
 #include "library.h"
-
 #include <stdio.h>
 #include <stdlib.h>
 
-int top = -1;
+#define STACK_SIZE 100
 
+int top = -1;
+int stack[STACK_SIZE];
 void push(int data) {
     if(!isFull()) {
         top = top + 1;
@@ -13,9 +14,9 @@ void push(int data) {
         printf("Error al agregar un elemento. Stack lleno.\n");
     }
 }
-int pop(int data) {
-    if(!isEmpty()) {top = -1;
-
+int pop() {
+    int data;
+    if(!isEmpty()) {
         data = stack[top];
         top = top - 1;
         return data;

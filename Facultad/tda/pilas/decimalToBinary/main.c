@@ -5,6 +5,7 @@ void conversion(int num);
 
 int main() {
     int number;
+
     printf("Ingrese el numero que desee convertir a binario: ");
     scanf("%d", &number);
     conversion(number);
@@ -12,14 +13,20 @@ int main() {
     return 0;
 }
 void conversion(int num) {
-    int remainder;
+    int remainder, spaceCounter;
+    spaceCounter = 0;
     while(num != 0) {
-        num = num / 2;
         remainder = num % 2;
         push(remainder);
+        num = num / 2;
+        spaceCounter ++;
     }
+    spaceCounter = 0;
     while(top != -1) {
-        printf("%d ", pop());
+        printf("%d", pop());
+        if(spaceCounter == 4) {
+            printf(" ");
+        }
     }
     printf("\n");
 }

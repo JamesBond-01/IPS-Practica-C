@@ -2,10 +2,8 @@
 #define PILASLIB_LIBRARY_H
 
 #include <stdbool.h>
-#define STACK_SIZE 100
 
 extern int top;
-int stack[STACK_SIZE];
 
 void push(int data);
 int pop();
