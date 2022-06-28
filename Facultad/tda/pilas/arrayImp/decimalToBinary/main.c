@@ -13,18 +13,22 @@ int main() {
     return 0;
 }
 void conversion(int num) {
-    int remainder, spaceCounter;
-    spaceCounter = 0;
+    int remainder, posCounter;
     while(num != 0) {
         remainder = num % 2;
         push(remainder);
         num = num / 2;
-        spaceCounter ++;
     }
-    spaceCounter = 0;
+    posCounter = 1;
+    if(num >= 0) {
+        printf("0");
+    } else {
+        printf("1");
+    }
     while(top != -1) {
+        posCounter++;
         printf("%d", pop());
-        if(spaceCounter == 4) {
+        if(posCounter == 4) {
             printf(" ");
         }
     }
