@@ -48,16 +48,16 @@ int peek() {
     return top->data;
 }
 void print() {
-    struct node *tmp = top;
+    struct node *tmp = NULL;
     if(isEmpty()) {
         printf("Error. El stack se encuentra vacio.\n");
         exit(1);
     }
     printf("Mostrando stack en pantalla...\n");
+    tmp = top;
     while(tmp) {
-        printf("\t\t");
         printf("%d ", tmp->data);
-        printf("\n");
         tmp = tmp->link;
     }
+    printf("\n");
 }
