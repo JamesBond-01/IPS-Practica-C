@@ -12,7 +12,6 @@ struct node {
 struct node *getNewNode(int data);
 struct node *insert(struct node *root, int data);
 bool isInTheTree(struct node *root, int data);
-struct node *search(struct node *root, int data);
 struct node *findMin(struct node *root);
 struct node *findMax(struct node *root);
 struct node *delete(struct node *root, int data);

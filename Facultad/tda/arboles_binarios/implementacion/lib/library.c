@@ -23,24 +23,15 @@ struct node *insert(struct node *root, int data) {
 bool isInTheTree(struct node *root, int data) {
     if(root == NULL) {
         return false;
-    } else if(data < root->data) {
+    } else if(data == root->data) {
+        return true;
+    } else if(data < root->data){
         isInTheTree(root->left, data);
-    } else if(data > root->data){
-        isInTheTree(root->right, data);
+    } else {
+        return isInTheTree(root->right, data);
     }
-    return true;
 }
-struct node *search(struct node *root, int data) {
-    if(root == NULL) {
-        printf("No se pudo encontrar el elemento en el arbol.\n");
-        return NULL;
-    } else if(data < root->data) {
-        search(root->left, data);
-    } else if(data > root->data){
-        search(root->right, data);
-    }
-    return root;
-}
+
 struct node *findMin(struct node *root) {
     while(root->left != NULL) {
         root = root->left;
@@ -56,13 +47,16 @@ struct node *findMax(struct node *root) {
 struct node *delete(struct node *root, int data) {
     if(root == NULL) {
         printf("Error al eliminar un elemento del arbol. Se encuentra vacio.\n");
-        return NULL;
+        return root;
     }
     if(!isInTheTree(root, data)) {
         printf("El elemento que desea eliminar no se pudo encontrar en el arbol.\n");
-        return NULL;
+        return root;
+    } else if(data < root->data) {
+        root->left = delete(root->left, data);
+    }  else if(data > root->data) {
+        root->right = delete(root->right, data);
     } else {
-        root = search(root, data);
         //Si el nodo no tiene hijos:
         if (root->right == NULL && root->left == NULL) {
             free(root);
