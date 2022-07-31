@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct node *newNode(struct node *root, int data) {
+struct node *getNewNode(int data) {
     struct node *newElement = malloc(sizeof(struct node));
     newElement->data = data;
     newElement->right = NULL;
@@ -12,11 +12,11 @@ struct node *newNode(struct node *root, int data) {
 }
 struct node *insert(struct node *root, int data) {
     if(root == NULL) {
-        root = newNode(root, data);
+        root = getNewNode(data);
     } else if(data < root->data) {
-        root = insert(root->left, data);
+        root->left = insert(root->left, data);
     } else {
-        root = insert(root->right, data);
+        root->right = insert(root->right, data);
     }
     return root;
 }
@@ -93,7 +93,7 @@ void preorder(struct node *root) {
     if(root == NULL) {
         return;
     }
-    printf("%d, ",root->data);
+    printf("\t%d\n",root->data);
     preorder(root->left);
     preorder(root->right);
 }
@@ -102,7 +102,7 @@ void inorder(struct node *root) {
         return;
     }
     inorder(root->left);
-    printf("%d, ",root->data);
+    printf("\t%d\n",root->data);
     inorder(root->right);
 }
 void postorder(struct node *root) {
@@ -111,5 +111,5 @@ void postorder(struct node *root) {
     }
     postorder(root->left);
     postorder(root->right);
-    printf("%d, ", root->data);
+    printf("\t%d\n", root->data);
 }
