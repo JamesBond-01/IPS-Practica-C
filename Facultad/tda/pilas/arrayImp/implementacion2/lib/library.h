@@ -4,7 +4,7 @@
 #include <stdbool.h>
 
 void push(int data);
-int pop(int data);
+int pop();
 bool isFull();
 bool isEmpty();
 int peek();

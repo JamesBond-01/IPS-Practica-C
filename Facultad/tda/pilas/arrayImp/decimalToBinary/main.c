@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "../pilaArray/lib/library.h"
+#include "../implementacion1/lib/library.h"
 
 void conversion(int num);
 

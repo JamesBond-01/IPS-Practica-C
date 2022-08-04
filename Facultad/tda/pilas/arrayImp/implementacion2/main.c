@@ -1,8 +1,3 @@
-/**
- * Este programa, a diferencia de pilaArray, almacena el ultimo elemento ingresado en la primera posicion del array.
- * Es decir, el ultimo numero se guarda en stack[0].
- */
-
 #include <stdio.h>
 #include <stdlib.h>
 #include "lib/library.h"
@@ -35,7 +30,7 @@ int main() {
                 break;
             case 2:
                 if(!isEmpty()) {
-                    element = pop(element);
+                    printf("Numero %d eliminado correctamente.\n", pop());
                 } else {
                     printf("Lista vacia. No se pueden eliminar mas elementos.\n");
                 }

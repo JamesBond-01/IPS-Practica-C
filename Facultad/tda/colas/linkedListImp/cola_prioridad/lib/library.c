@@ -5,33 +5,75 @@
 
 struct node {
     int data;
-    int priority;
     struct node *link;
 };
-struct node *front = NULL;
-struct node *rear = NULL;
+struct node *head = NULL;
+struct node *tail = NULL;
+struct node *tmp = NULL;
+struct node *prevTmp = NULL;
 
-void enqueue(int data, int priority) {
-    struct node *element = malloc(sizeof(struct node));
-    if(element == NULL) {
-        printf("Se ha producido un error al reservar memoria para el nuevo elemento.\n");
-        exit(1);
-    }
-    element->data = data;
-    element->priority = priority;
-    element->link = NULL;
-    if(isEmpty()) {
-        front = element;
+void enqueue(int data) {
+    struct node *newElement = malloc(sizeof(struct node));
+
+    if(newElement == NULL) {
+        printf("Error al reservar memoria para el nuevo elemento.\n");
         return;
     }
-    if(element->priority > front->priority) {
-        element->link = front;
-        front = element;
-    } else if(element->priority == front->priority) {
-        element->link = front->link;
-        front->link = element;
-    } else {
-        front->link = element;
+    newElement->data = data;
+    newElement->link = NULL;
+    if(isEmpty()) {
+        head = newElement;
+        tail = newElement;
+        return;
+    }
+    if(newElement->data <= head->data) {
+        newElement->link = head;
+        head = newElement;
+        return;
+    } else if(newElement->data > tail->data) {
+        tail->link = newElement;
+        tail = newElement;
+        return;
+    }
+    tmp = head->link;
+    prevTmp = head;
+    while(prevTmp->link != NULL) {
+        if((newElement->data > prevTmp->data) && (newElement->data <= tmp->data)) {
+            newElement->link = tmp;
+            prevTmp->link = newElement;
+            return;
+        }
+        prevTmp = tmp;
+        tmp = tmp->link;
     }
 }
-
+int dequeue() {
+    if(isEmpty()) {
+        printf("La cola se encuentra vacia.\n");
+        exit(1);
+    }
+    tmp = head;
+    int value = head->data;
+    head = head->link;
+    free(tmp);
+    tmp = NULL;
+    return value;
+}
+bool isEmpty() {
+    if(head == NULL) {
+        return true;
+    }
+    return false;
+}
+void printCola() {
+    if(isEmpty()) {
+        printf("La cola se encuentra vacia.\n");
+        return;
+    }
+    tmp = head;
+    while(tmp) {
+        printf("%d ", tmp->data);
+        tmp = tmp->link;
+    }
+    printf("\n");
+}

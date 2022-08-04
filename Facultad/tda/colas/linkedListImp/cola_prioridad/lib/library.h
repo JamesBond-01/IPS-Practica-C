@@ -3,7 +3,7 @@
 
 #include <stdbool.h>
 
-void enqueue(int data, int priority);
+void enqueue(int data);
 int dequeue();
 bool isEmpty();
 void printCola();

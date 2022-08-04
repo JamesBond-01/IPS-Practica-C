@@ -3,6 +3,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/**
+ * Esta funcion genera un nuevo nodo para el arbol.
+ * @param data
+ * @return nodo
+ */
 struct node *getNewNode(int data) {
     struct node *newElement = malloc(sizeof(struct node));
     newElement->data = data;
@@ -30,6 +35,7 @@ bool isInTheTree(struct node *root, int data) {
     } else {
         return isInTheTree(root->right, data);
     }
+    return 0;
 }
 
 struct node *findMin(struct node *root) {
@@ -62,13 +68,13 @@ struct node *delete(struct node *root, int data) {
             free(root);
             root = NULL;
         }
-            //Si el nodo tiene un solo hijo del lado izquierdo:
+        //Si el nodo tiene un solo hijo del lado izquierdo:
         else if (root->right == NULL) {
             struct node *tmp = root;
             root = root->left;
             free(tmp);
         }
-            //Si el nodo tiene un solo hijo del lado derecho:
+        //Si el nodo tiene un solo hijo del lado derecho:
         else if (root->left == NULL) {
             struct node *tmp = root;
             root = root->right;
