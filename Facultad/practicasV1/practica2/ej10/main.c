@@ -1,7 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-#include <malloc.h>
 #include <stdbool.h>
 
 typedef struct {
@@ -69,7 +67,7 @@ int main() {
 						continue;
 					}
 
-					*carList++;
+					carList++;
 				}
 
 			} while(carCheck == false);
@@ -108,12 +106,12 @@ void crearAuto(Auto *carList, int i, int cant) {
 	printf("\tMarca: ");
 	fgets(carList->marca, 100, stdin);
 
-//	printf("\tModelo: ");
-//	fgets(carList->modelo, 100, stdin);
+	printf("\tModelo: ");
+	fgets(carList->modelo, 100, stdin);
 
-//	printf("\tPotencia del motor (hp): ");
-//	scanf("%d", &carList->tamanioMotor);
-//	getchar();
+	printf("\tPotencia del motor (hp): ");
+	scanf("%d", &carList->tamanioMotor);
+	getchar();
 
 	printf("\tColor: ");
 	fgets(carList->color, 20, stdin);
@@ -128,9 +126,9 @@ void crearAuto(Auto *carList, int i, int cant) {
 		getchar();
 	}
 
-//	printf("\tNumero grabado de motor: ");
-//	scanf("%d", &carList->numeroMotor);
-//	getchar();
+	printf("\tNumero grabado de motor: ");
+	scanf("%d", &carList->numeroMotor);
+	getchar();
 
 
 }
