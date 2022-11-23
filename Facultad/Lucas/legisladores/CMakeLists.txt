@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.23)
-project(legisladores C)
+project(legisladoresV2 C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(legisladores main.c)
+add_executable(legisladoresV2 main.c)
