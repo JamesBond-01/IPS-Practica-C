@@ -4,7 +4,7 @@
 #include <ctype.h>
 #include <string.h>
 
-#define MAX_NAME_LENGTH 10
+#define MAX_NAME_LENGTH 14
 
 void insertarPrincipio(char mandato, char *nombre);
 void insertarEnPosicion(char mandato, char *nombre, int pos);
@@ -33,8 +33,9 @@ int main() {
         char *nombre = malloc(MAX_NAME_LENGTH * sizeof(char));
         system("clear");
         printf("Ingrese:\n");
+        printf("0. Salir.\n");
         printf("1. Agregar legisladores.\n");
-        if(!(estaVacio())) {
+        if(!(estaVacio())) {    //Si la lista se encuentra vacia, no se muestran las siguientes opciones.
             printf("2. Eliminar legisladores.\n");
             printf("3. Buscar un legislador.\n");
             printf("4. Mostrar lista.\n");
@@ -42,11 +43,13 @@ int main() {
         printf(">> ");
         scanf("%d", &menu);
         getchar();
-        if(((estaVacio()) && (menu != 1)) || (menu < 1) || (menu > 4)) {
+        if(((estaVacio()) && ((menu != 1) && (menu != 0))) || (menu < 0) || (menu > 4)) {
             printf("\tEl valor ingresado no corresponde con ninguna de las opciones.\n");
             continue;
         }
         switch(menu) {
+            case 0:
+                return 0;
             //Caso 1: Agregar un legislador a la lista. Se presentan 3 subopciones:
             //  -Agregar al principio de la lista.
             //  -Agregar en una posicion determinada.
