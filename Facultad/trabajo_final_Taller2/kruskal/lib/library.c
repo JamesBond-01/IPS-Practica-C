@@ -148,7 +148,6 @@ arista sacar_min() {
         printf("La cola se encuentra vacia.\n");
         exit(1);
     }
-    tmp = head;
     arista aristaSelec = head->a;
     head = head->sig;
     return aristaSelec;
