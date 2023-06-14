@@ -1,0 +1,12 @@
+{
+  "version": "0.2.1",
+  "defaults": {},
+  "configurations": [
+    {
+      "type": "default",
+      "project": "CMakeLists.txt",
+      "projectTarget": "LegisladoresV2.exe",
+      "name": "LegisladoresV2.exe"
+    }
+  ]
+}
