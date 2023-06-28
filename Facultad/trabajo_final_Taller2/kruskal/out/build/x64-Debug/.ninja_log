@@ -1,0 +1,8 @@
+# ninja log v5
+42	279	7096062193459330	CMakeFiles/kruskal.dir/lib/library.c.obj	1fb19fb948e65273
+12	801	7095985973160281	CMakeFiles/kruskal.dir/main.c.obj	dbef8a069af7cc6d
+281	749	7096062197124724	kruskal.exe	49ae80cef20aac7e
+8	1035	7096773431230138	CMakeFiles/kruskal.dir/kruskal.c.obj	bc94539b37ef6394
+1037	2403	7096773442148894	kruskal.exe	58ce250c4cb095
+36	760	7096785554642314	CMakeFiles/kruskal.dir/kruskal.c.obj	bc94539b37ef6394
+763	1672	7096785562192418	kruskal.exe	58ce250c4cb095
