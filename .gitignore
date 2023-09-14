@@ -67,3 +67,7 @@ cmake-build-debug
 
 #Other
 .idea
+.vs/
+out/
+.idea/
+cmake-build-debug/
